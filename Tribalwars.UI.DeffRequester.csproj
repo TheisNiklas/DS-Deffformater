@@ -5,9 +5,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <SignAssembly>false</SignAssembly>
+    <Version>0.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\attack.png" />
+    <None Remove="Images\attack_large.png" />
+    <None Remove="Images\attack_medium.png" />
+    <None Remove="Images\attack_small.png" />
     <None Remove="Images\unit_archer.png" />
     <None Remove="Images\unit_axe.png" />
     <None Remove="Images\unit_catapult.png" />
@@ -29,6 +34,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\attack.png" />
+    <Resource Include="Images\attack_large.png" />
+    <Resource Include="Images\attack_medium.png" />
+    <Resource Include="Images\attack_small.png" />
     <Resource Include="Images\unit_archer.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

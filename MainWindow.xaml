@@ -17,7 +17,19 @@
     <Window.Resources>
         <util:InvertBooleanConverter  x:Key="InvertBooleanConverter"/>
         <util:RelativeDeffRequestConverter x:Key="RelativeDeffRequestConverter"/>
+        <util:AttackTypeCountConverter x:Key="AttackTypeCountConverter"/>
+        <util:AttackTypeCountVisibilityConverter x:Key="AttackTypeCountVisibilityConverter"/>
+
+        <Style x:Key="CenterDataGridCell" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style x:Key="CenterDataGridHeader" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
     </Window.Resources>
+
+    
     <ScrollViewer>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -133,19 +145,22 @@
                     MaxHeight="500"
                     Margin="0 8 0 0"
                     ItemsSource="{Binding villages, IsAsync=True}"
+                    TargetUpdated="dataGridVillages_TargetUpdated"
                     CanUserSortColumns="False" 
                     CanUserAddRows="False"
                     AutoGenerateColumns="False"
                     materialDesign:DataGridAssist.CellPadding="4 2 2 2"
                     materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2"
-                    HeadersVisibility="All">
+                    HeadersVisibility="All" CanUserReorderColumns="False" GridLinesVisibility="All" VerticalGridLinesBrush="#FFDEDEDE">
                     <!--CanUserSortColumns true?-->
                     <DataGrid.Resources>
                         <util:CoordinatesConverter x:Key="CoordinatesConverter"/>
                     </DataGrid.Resources>
+                    
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn
                             Binding="{Binding IsSelected}"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}"
                             ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
                             <DataGridCheckBoxColumn.Header>
@@ -163,6 +178,8 @@
                         <DataGridTextColumn
                             Header="Koordianten"
                             IsReadOnly="True"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}"
+                            ElementStyle="{StaticResource CenterDataGridCell}"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCell}" >
                             <DataGridTextColumn.Binding>
                                 <MultiBinding Converter="{StaticResource CoordinatesConverter}">
@@ -175,23 +192,31 @@
                             Binding="{Binding WallLevel}"
                             Header="Wall"
                             IsReadOnly="True"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}"
+                            ElementStyle="{StaticResource CenterDataGridCell}"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCell}">
                         </DataGridTextColumn>
                         <DataGridTextColumn
                             Binding="{Binding Loyalty}"
                             Header="Loyalty"
                             IsReadOnly="True"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}"
+                            ElementStyle="{StaticResource CenterDataGridCell}"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCell}">
                         </DataGridTextColumn>
                         <DataGridTextColumn
                             Binding="{Binding Attacks.Count}"
                             Header="Attacks"
                             IsReadOnly="True"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}"
+                            ElementStyle="{StaticResource CenterDataGridCell}"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCell}">
                         </DataGridTextColumn>
                         <DataGridTextColumn
                             Binding="{Binding Units.Spear}"
                             IsReadOnly="True"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}"
+                            ElementStyle="{StaticResource CenterDataGridCell}"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCell}">
                             <DataGridTextColumn.Header>
                                 <Image Source="/Images/unit_spear.png" Height="14"/>
@@ -200,6 +225,8 @@
                         <DataGridTextColumn
                             Binding="{Binding Units.Sword}"
                             IsReadOnly="True"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}"
+                            ElementStyle="{StaticResource CenterDataGridCell}"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCell}">
                             <DataGridTextColumn.Header>
                                 <Image Source="/Images/unit_sword.png" Height="14"/>
@@ -208,6 +235,8 @@
                         <DataGridTextColumn
                             Binding="{Binding Units.Axe}"
                             IsReadOnly="True"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}"
+                            ElementStyle="{StaticResource CenterDataGridCell}"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCell}">
                             <DataGridTextColumn.Header>
                                 <Image Source="/Images/unit_axe.png" Height="14"/>
@@ -216,6 +245,8 @@
                         <DataGridTextColumn
                             Binding="{Binding Units.Arrow}"
                             IsReadOnly="True"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}"
+                            ElementStyle="{StaticResource CenterDataGridCell}"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCell}">
                             <DataGridTextColumn.Header>
                                 <Image Source="/Images/unit_archer.png" Height="14"/>
@@ -224,6 +255,8 @@
                         <DataGridTextColumn
                             Binding="{Binding Units.Spy}"
                             IsReadOnly="True"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}"
+                            ElementStyle="{StaticResource CenterDataGridCell}"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCell}">
                             <DataGridTextColumn.Header>
                                 <Image Source="/Images/unit_spy.png" Height="14"/>
@@ -232,6 +265,8 @@
                         <DataGridTextColumn
                             Binding="{Binding Units.LightCavalry}"
                             IsReadOnly="True"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}"
+                            ElementStyle="{StaticResource CenterDataGridCell}"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCell}">
                             <DataGridTextColumn.Header>
                                 <Image Source="/Images/unit_light.png" Height="14"/>
@@ -240,6 +275,8 @@
                         <DataGridTextColumn
                             Binding="{Binding Units.MountedArcher}"
                             IsReadOnly="True"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}"
+                            ElementStyle="{StaticResource CenterDataGridCell}"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCell}">
                             <DataGridTextColumn.Header>
                                 <Image Source="/Images/unit_marcher.png" Height="14"/>
@@ -248,6 +285,8 @@
                         <DataGridTextColumn
                             Binding="{Binding Units.HeavyCavalry}"
                             IsReadOnly="True"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}"
+                            ElementStyle="{StaticResource CenterDataGridCell}"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCell}">
                             <DataGridTextColumn.Header>
                                 <Image Source="/Images/unit_heavy.png" Height="14"/>
@@ -256,14 +295,18 @@
                         <DataGridTextColumn
                             Binding="{Binding Units.Ram}"
                             IsReadOnly="True"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}"
+                            ElementStyle="{StaticResource CenterDataGridCell}"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCell}">
                             <DataGridTextColumn.Header>
-                                <Image Source="/Images/unit_ram.png" Height="14"/>
+                                <Image Source="/Images/unit_ram.png" Height="14" HorizontalAlignment="Center"/>
                             </DataGridTextColumn.Header>
                         </DataGridTextColumn>
                         <DataGridTextColumn
                             Binding="{Binding Units.Catapult}"
                             IsReadOnly="True"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}"
+                            ElementStyle="{StaticResource CenterDataGridCell}"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCell}">
                             <DataGridTextColumn.Header>
                                 <Image Source="/Images/unit_catapult.png" Height="14"/>
@@ -272,21 +315,131 @@
                         <DataGridTextColumn
                             Binding="{Binding Units.Paladin}"
                             IsReadOnly="True"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}"
+                            ElementStyle="{StaticResource CenterDataGridCell}"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCell}">
                             <DataGridTextColumn.Header>
                                 <Image Source="/Images/unit_knight.png" Height="14"/>
                             </DataGridTextColumn.Header>
                         </DataGridTextColumn>
                         <DataGridTextColumn
+                            Binding="{Binding Units.Snob}"
+                            IsReadOnly="True"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}"
+                            ElementStyle="{StaticResource CenterDataGridCell}"
+                            EditingElementStyle="{StaticResource MaterialDesignDataGridCell}">
+                            <DataGridTextColumn.Header>
+                                <Image Source="/Images/unit_snob.png" Height="14"/>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
                             Binding="{Binding Units.Militia}"
                             IsReadOnly="True"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}"
+                            ElementStyle="{StaticResource CenterDataGridCell}"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCell}">
                             <DataGridTextColumn.Header>
                                 <Image Source="/Images/unit_militia.png" Height="14"/>
                             </DataGridTextColumn.Header>
                         </DataGridTextColumn>
+                        <DataGridTemplateColumn
+                            Header="Angriffstypen"
+
+                            HeaderStyle="{StaticResource CenterDataGridHeader}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <Border BorderThickness="2" CornerRadius="6" BorderBrush="#ba7b23" Padding="3,1" MaxHeight="17" Margin="2,0" Visibility="{Binding Converter={StaticResource AttackTypeCountVisibilityConverter}, ConverterParameter='NameDetected 1', NotifyOnTargetUpdated=True}">
+                                            <StackPanel Orientation="Horizontal" >
+                                                <Image Source="Images/unit_axe.png"></Image>
+                                                <TextBlock Margin="2,0,0,0" Text="{Binding Converter={StaticResource AttackTypeCountConverter}, ConverterParameter='NameDetected 1'}" VerticalAlignment="Center"></TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border BorderThickness="2" CornerRadius="6" BorderBrush="#ba7b23" Padding="3,1" MaxHeight="17" Margin="2,0" Visibility="{Binding Converter={StaticResource AttackTypeCountVisibilityConverter}, ConverterParameter='NameDetected 2'}">
+                                            <StackPanel Orientation="Horizontal" >
+                                                <Image Source="Images/unit_sword.png"></Image>
+                                                <TextBlock Margin="2,0,0,0" Text="{Binding Converter={StaticResource AttackTypeCountConverter}, ConverterParameter='NameDetected 2'}" VerticalAlignment="Center"></TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border BorderThickness="2" CornerRadius="6" BorderBrush="#ba7b23" Padding="3,1" MaxHeight="17" Margin="2,0" Visibility="{Binding Converter={StaticResource AttackTypeCountVisibilityConverter}, ConverterParameter='NameDetected 3'}">
+                                            <StackPanel Orientation="Horizontal" >
+                                                <Image Source="Images/unit_spy.png"></Image>
+                                                <TextBlock Margin="2,0,0,0" Text="{Binding Converter={StaticResource AttackTypeCountConverter}, ConverterParameter='NameDetected 3'}" VerticalAlignment="Center"></TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border BorderThickness="2" CornerRadius="6" BorderBrush="#ba7b23" Padding="3,1" MaxHeight="17" Margin="2,0" Visibility="{Binding Converter={StaticResource AttackTypeCountVisibilityConverter}, ConverterParameter='NameDetected 4'}">
+                                            <StackPanel Orientation="Horizontal" >
+                                                <Image Source="Images/unit_light.png"></Image>
+                                                <TextBlock Margin="2,0,0,0" Text="{Binding Converter={StaticResource AttackTypeCountConverter}, ConverterParameter='NameDetected 4'}" VerticalAlignment="Center"></TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border BorderThickness="2" CornerRadius="6" BorderBrush="#ba7b23" Padding="3,1" MaxHeight="17" Margin="2,0" Visibility="{Binding Converter={StaticResource AttackTypeCountVisibilityConverter}, ConverterParameter='NameDetected 5'}">
+                                            <StackPanel Orientation="Horizontal" >
+                                                <Image Source="Images/unit_heavy.png"></Image>
+                                                <TextBlock Margin="2,0,0,0" Text="{Binding Converter={StaticResource AttackTypeCountConverter}, ConverterParameter='NameDetected 5'}" VerticalAlignment="Center"></TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border BorderThickness="2" CornerRadius="6" BorderBrush="#ba7b23" Padding="3,1" MaxHeight="17" Margin="2,0" Visibility="{Binding Converter={StaticResource AttackTypeCountVisibilityConverter}, ConverterParameter='NameDetected 6'}">
+                                            <StackPanel Orientation="Horizontal" >
+                                                <Image Source="Images/unit_ram.png"></Image>
+                                                <TextBlock Margin="2,0,0,0" Text="{Binding Converter={StaticResource AttackTypeCountConverter}, ConverterParameter='NameDetected 6'}" VerticalAlignment="Center"></TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border BorderThickness="2" CornerRadius="6" BorderBrush="#ba7b23" Padding="3,1" MaxHeight="17" Margin="2,0" Visibility="{Binding Converter={StaticResource AttackTypeCountVisibilityConverter}, ConverterParameter='NameDetected 7'}">
+                                            <StackPanel Orientation="Horizontal" >
+                                                <Image Source="Images/unit_snob.png"></Image>
+                                                <TextBlock Margin="2,0,0,0" Text="{Binding Converter={StaticResource AttackTypeCountConverter}, ConverterParameter='NameDetected 7'}" VerticalAlignment="Center"></TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border BorderThickness="2" CornerRadius="6" BorderBrush="#ba7b23" Padding="3,1" MaxHeight="17" Margin="2,0" Visibility="{Binding Converter={StaticResource AttackTypeCountVisibilityConverter}, ConverterParameter='NameDetected 0'}">
+                                            <StackPanel Orientation="Horizontal" >
+                                                <materialDesign:PackIcon Kind="Help" Height="11" Width="11"/>
+                                                <TextBlock Margin="2,0,0,0" Text="{Binding Converter={StaticResource AttackTypeCountConverter}, ConverterParameter='NameDetected 0'}" VerticalAlignment="Center"></TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn 
+                            Header="Angriffsgrößen"
+                            HeaderStyle="{StaticResource CenterDataGridHeader}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <Border BorderThickness="2" CornerRadius="6" BorderBrush="#940000" Padding="3,1" MaxHeight="17" Margin="2,0" Visibility="{Binding Converter={StaticResource AttackTypeCountVisibilityConverter}, ConverterParameter='AttackSize 1'}">
+                                            <StackPanel Orientation="Horizontal" >
+                                                <Image Source="Images/attack_large.png" Height="10"></Image>
+                                                <TextBlock Margin="2,0,0,0" Text="{Binding Converter={StaticResource AttackTypeCountConverter}, ConverterParameter='AttackSize 1'}" VerticalAlignment="Center"></TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border BorderThickness="2" CornerRadius="6" BorderBrush="#b86711" Padding="3,1" MaxHeight="17" Margin="2,0" Visibility="{Binding Converter={StaticResource AttackTypeCountVisibilityConverter}, ConverterParameter='AttackSize 2'}">
+                                            <StackPanel Orientation="Horizontal" >
+                                                <Image Source="Images/attack_medium.png" Height="10"></Image>
+                                                <TextBlock Margin="2,0,0,0" Text="{Binding Converter={StaticResource AttackTypeCountConverter}, ConverterParameter='AttackSize 2'}" VerticalAlignment="Center"></TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border BorderThickness="2" CornerRadius="6" BorderBrush="#508016" Padding="3,1" MaxHeight="17" Margin="2,0" Visibility="{Binding Converter={StaticResource AttackTypeCountVisibilityConverter}, ConverterParameter='AttackSize 3'}">
+                                            <StackPanel Orientation="Horizontal" >
+                                                <Image Source="Images/attack_small.png" Height="10"></Image>
+                                                <TextBlock Margin="2,0,0,0" Text="{Binding Converter={StaticResource AttackTypeCountConverter}, ConverterParameter='AttackSize 3'}" VerticalAlignment="Center"></TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border BorderThickness="2" CornerRadius="6" BorderBrush="#808080" Padding="3,1" MaxHeight="17" Margin="2,0" Visibility="{Binding Converter={StaticResource AttackTypeCountVisibilityConverter}, ConverterParameter='AttackSize 0'}">
+                                            <StackPanel Orientation="Horizontal" >
+                                                <Image Source="Images/attack.png" Height="10"></Image>
+                                                <TextBlock Margin="2,0,0,0" Text="{Binding Converter={StaticResource AttackTypeCountConverter}, ConverterParameter='AttackSize 0'}" VerticalAlignment="Center"></TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+
+
+
                 <GroupBox Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
                           Header="Einstellungen"
                           Margin="16,10,5,16">

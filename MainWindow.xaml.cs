@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Tribalwars.UI.DeffRequester.Models;
 using Tribalwars.UI.DeffRequester.Util;
 
@@ -21,7 +11,7 @@ namespace Tribalwars.UI.DeffRequester
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public List<DeffRequestVillage> ReadVillages;
         public List<DeffRequestVillage> Villages;
@@ -35,7 +25,6 @@ namespace Tribalwars.UI.DeffRequester
             ReadVillages = ParseInputCode.Parse(TbUtRequestInput.Text);
             Villages = CopyList(ReadVillages);
             DataGridVillages.ItemsSource = Villages;
-            int i = 0;
         }
 
         private void CbAll_OnChecked(object sender, RoutedEventArgs e)
@@ -45,8 +34,10 @@ namespace Tribalwars.UI.DeffRequester
                 foreach (var village in Villages)
                 {
                     village.IsSelected = true;
-                    DataGridVillages.Items.Refresh();
                 }
+                DataGridVillages.CancelEdit();
+                DataGridVillages.CancelEdit();
+                DataGridVillages.Items.Refresh();
             }
         }
 
@@ -108,6 +99,17 @@ namespace Tribalwars.UI.DeffRequester
             }
             Villages = Villages.Where(v => v.Attacks.Count > 0).ToList();
             DataGridVillages.ItemsSource = Villages;
+        }
+
+        private void dataGridVillages_TargetUpdated(object sender, DataTransferEventArgs e)
+        {
+            DataGridVillages.Columns.FirstOrDefault(c => c.Header.Equals("Angriffsgrößen")).Width = 0;
+            DataGridVillages.Columns.FirstOrDefault(c => c.Header.Equals("Angriffstypen")).Width = 0;
+            DataGridVillages.UpdateLayout();
+            DataGridVillages.Columns.FirstOrDefault(c => c.Header.Equals("Angriffsgrößen")).Width =
+                new DataGridLength(1, DataGridLengthUnitType.Auto);
+            DataGridVillages.Columns.FirstOrDefault(c => c.Header.Equals("Angriffstypen")).Width =
+                new DataGridLength(1, DataGridLengthUnitType.Auto);
         }
 
         private List<DeffRequestVillage> CopyList(List<DeffRequestVillage> input)
