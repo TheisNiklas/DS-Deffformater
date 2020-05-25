@@ -73,7 +73,7 @@ namespace Tribalwars.UI.DeffRequester
                 deffRequested.Add(int.Parse(Cb9Incs.Text));
                 deffRequested.Add(int.Parse(Cb10Incs.Text));
             }
-            string output = GenerateOutputCode.Generate(TbFormatTemplate.Text, Villages, deffRequested);
+            string output = GenerateOutputCode.Generate(TbFormatTemplate.Text, Villages, deffRequested, this);
             TbOutput.Text = output;
         }
 

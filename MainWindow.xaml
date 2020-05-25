@@ -143,7 +143,7 @@
                     x:Name="DataGridVillages"
                     VerticalAlignment="Top"
                     MaxHeight="500"
-                    Margin="0 8 0 0"
+                    Margin="0,8,0,16"
                     ItemsSource="{Binding villages, IsAsync=True}"
                     TargetUpdated="dataGridVillages_TargetUpdated"
                     CanUserSortColumns="False" 
@@ -461,7 +461,15 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <TextBlock
                             Grid.Row="0" Grid.ColumnSpan="2"
@@ -629,17 +637,41 @@
                                 ToolTip="Relative Deff-Anzahl"
                                 Value="2"
                                 IsEnabled="{Binding ElementName=CheckBoxUseRelativeDeffCount, Path=IsChecked}"/>
-                            <TextBlock Grid.Column="1" VerticalAlignment="Top" Padding="0" Margin="3,0,0,0"
+                            <TextBlock Grid.Column="1" VerticalAlignment="Top" Padding="0" Margin="3,0,2,0"
                                 Text="{Binding ElementName=SliderRelativeDeff, Path=Value, Converter={StaticResource RelativeDeffRequestConverter}}"
                                 Style="{StaticResource MaterialDesignBody1TextBlock}"
                                 IsEnabled="{Binding ElementName=CheckBoxUseRelativeDeffCount, Path=IsChecked}"></TextBlock>
                         </Grid>
+                        <CheckBox
+                            x:Name="CheckBoxIgnoreGreenAttacks"
+                            Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2"
+                            IsChecked="True"
+                            Margin="0,5,0,5">
+                            <StackPanel Orientation="Horizontal">
+                                <Image VerticalAlignment="Center" Source="Images/attack_small.png" Height="12"/>
+                                <TextBlock VerticalAlignment="Center" FontSize="14">-Angriffe ignorieren</TextBlock>
+                            </StackPanel>
+                        </CheckBox>
+                        <CheckBox
+                            x:Name="CheckBoxCalculateAvailableDeff"
+                            Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2"
+                            IsChecked="False"
+                            VerticalAlignment="Center"
+                            Margin="0,0,0,0"
+                            Content="Vorhandene Deff anz." />
+                        <TextBox
+                            Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2"
+                            x:Name="TextBoxAvailableDeffBhPlaces"
+                            materialDesign:HintAssist.Hint="Bauernhof-Plätze je Deff"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            IsEnabled="{Binding ElementName=CheckBoxCalculateAvailableDeff, Path=IsChecked}"
+                            VerticalAlignment="Center" Margin="2,-5,2,0" >20000</TextBox>
                     </Grid>
                 </GroupBox>
             </Grid>
             
 
-            <TextBox Grid.Row="3" Grid.Column="0" Margin="5"
+            <TextBox Grid.Row="3" Grid.Column="0" Margin="5,5,8,5"
                      Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
                      x:Name="TbFormatTemplate"
                      TextWrapping="Wrap"
@@ -652,7 +684,7 @@
                      Height="100">
                 {Counter}. [b]Dorf:[/b] [coord]{Coords}[/coord] - ab {ArrivalFirstInc} - {IncCount} - {RequestedDeff}
             </TextBox>
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="5"
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="5,5,5,5"
                      Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
                      x:Name="TbOutput"
                      IsReadOnly="True"
@@ -669,7 +701,7 @@
             
             <Button 
                 Grid.Column="0" Grid.Row="4"
-                Margin="5" 
+                Margin="5,0,5,5" 
                 x:Name="BtnGenerateCode"
                 Click="BtnGenerateCode_Clicked"
                 HorizontalAlignment="Right">
@@ -692,7 +724,7 @@
                 </TextBlock>
                 <Button 
                     Grid.Column="1"
-                    Margin="5" 
+                    Margin="5,0,5,5" 
                     x:Name="BtnCopyCode"
                     Click="BtnCopyCode_Clicked"
                     HorizontalAlignment="Right">

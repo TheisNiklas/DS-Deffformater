@@ -94,11 +94,11 @@ namespace Tribalwars.UI.DeffRequester.Models
                 if (Name.Contains("Axt", StringComparison.CurrentCultureIgnoreCase)) NamedType = 1;
                 else if (Name.Contains("Schwert", StringComparison.CurrentCultureIgnoreCase)) NamedType = 2;
                 else if (Name.Contains("Spy", StringComparison.CurrentCultureIgnoreCase)) NamedType = 3;
-                else if (Name.Contains("Späher", StringComparison.CurrentCultureIgnoreCase)) NamedType = 3;
+                else if (Name.Contains("Späh", StringComparison.CurrentCultureIgnoreCase)) NamedType = 3;
                 else if (Name.Contains("Lkav", StringComparison.CurrentCultureIgnoreCase)) NamedType = 4;
                 else if (Name.Contains("Skav", StringComparison.CurrentCultureIgnoreCase)) NamedType = 5;
                 else if (Name.Contains("Ram", StringComparison.CurrentCultureIgnoreCase)) NamedType = 6;
-                else if (Name.Contains("AG ", StringComparison.CurrentCultureIgnoreCase)) NamedType = 7;
+                else if (Name.Contains("AG", StringComparison.CurrentCultureIgnoreCase)) NamedType = 7;
             }
             else
             {

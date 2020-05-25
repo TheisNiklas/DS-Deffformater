@@ -40,19 +40,38 @@ namespace Tribalwars.UI.DeffRequester.Models
         }
         public DeffRequestUnits(List<string> strings)
         {
-            Spear = int.Parse(strings[0]);
-            Sword = int.Parse(strings[1]);
-            Axe = int.Parse(strings[2]);
-            Arrow = int.Parse(strings[3]);
-            Spy = int.Parse(strings[4]);
-            LightCavalry = int.Parse(strings[5]);
-            MountedArcher = int.Parse(strings[6]);
-            HeavyCavalry = int.Parse(strings[7]);
-            Ram = int.Parse(strings[8]);
-            Catapult = int.Parse(strings[9]);
-            Paladin = int.Parse(strings[10]);
-            Snob = int.Parse(strings[11]);
-            Militia = int.Parse(strings[12]);
+            if (strings.Count == 13)
+            {
+                Spear = int.Parse(strings[0]);
+                Sword = int.Parse(strings[1]);
+                Axe = int.Parse(strings[2]);
+                Arrow = int.Parse(strings[3]);
+                Spy = int.Parse(strings[4]);
+                LightCavalry = int.Parse(strings[5]);
+                MountedArcher = int.Parse(strings[6]);
+                HeavyCavalry = int.Parse(strings[7]);
+                Ram = int.Parse(strings[8]);
+                Catapult = int.Parse(strings[9]);
+                Paladin = int.Parse(strings[10]);
+                Snob = int.Parse(strings[11]);
+                Militia = int.Parse(strings[12]);
+            }
+            else if(strings.Count == 11)
+            {
+                Spear = int.Parse(strings[0]);
+                Sword = int.Parse(strings[1]);
+                Axe = int.Parse(strings[2]);
+                Arrow = 0;
+                Spy = int.Parse(strings[3]);
+                LightCavalry = int.Parse(strings[4]);
+                MountedArcher = 0;
+                HeavyCavalry = int.Parse(strings[5]);
+                Ram = int.Parse(strings[6]);
+                Catapult = int.Parse(strings[7]);
+                Paladin = int.Parse(strings[8]);
+                Snob = int.Parse(strings[9]);
+                Militia = int.Parse(strings[10]);
+            }
         }
 
         public override string ToString()
